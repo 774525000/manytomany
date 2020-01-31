@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.bean.User" table="user">
+        <id name="id">
+            <generator class="native"/>
+        </id>
+        <property name="title" length="50"/>
+
+        <!--
+            级联： 原则，保存多的一方，所以由多的一方做级联
+        -->
+        <set name="role" table="role_user" cascade="save-update">
+            <key column="u_id"/>
+            <many-to-many class="com.bean.Role" column="r_id"/>
+        </set>
+    </class>
+</hibernate-mapping>
